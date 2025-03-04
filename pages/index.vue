@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { defineComponent, h } from "vue";
+
 const navigation = [
   { name: "SEO", href: "#" },
   { name: "Components", href: "#" },
@@ -34,88 +36,90 @@ const features = [
     icon: "humbleicons:fingerprint",
   },
 ];
-const tiers = [
-  {
-    name: "Freelancer",
-    id: "tier-freelancer",
-    href: "#",
-    priceMonthly: "$19",
-    description: "The essentials to provide your best work for clients.",
-    features: [
-      "5 products",
-      "Up to 1,000 subscribers",
-      "Basic analytics",
-      "48-hour support response time",
-    ],
-    mostPopular: false,
-  },
-  {
-    name: "Startup",
-    id: "tier-startup",
-    href: "#",
-    priceMonthly: "$49",
-    description: "A plan that scales with your rapidly growing business.",
-    features: [
-      "25 products",
-      "Up to 10,000 subscribers",
-      "Advanced analytics",
-      "24-hour support response time",
-      "Marketing automations",
-    ],
-    mostPopular: true,
-  },
-  {
-    name: "Enterprise",
-    id: "tier-enterprise",
-    href: "#",
-    priceMonthly: "$99",
-    description: "Dedicated support and infrastructure for your company.",
-    features: [
-      "Unlimited products",
-      "Unlimited subscribers",
-      "Advanced analytics",
-      "1-hour, dedicated support response time",
-      "Marketing automations",
-    ],
-    mostPopular: false,
-  },
-];
-const faqs = [
-  {
-    id: 1,
-    question: "What's the best thing about Switzerland?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
-  // More questions...
-];
-const footerNavigation = {
-  solutions: [
-    { name: "Hosting", href: "#" },
-    { name: "Data services", href: "#" },
-    { name: "Uptime monitoring", href: "#" },
-    { name: "Enterprise services", href: "#" },
-    { name: "Analytics", href: "#" },
-  ],
-  support: [
-    { name: "Submit ticket", href: "#" },
-    { name: "Documentation", href: "#" },
-    { name: "Guides", href: "#" },
-  ],
-  company: [
-    { name: "About", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Jobs", href: "#" },
-    { name: "Press", href: "#" },
-  ],
-  legal: [
-    { name: "Terms of service", href: "#" },
-    { name: "Privacy policy", href: "#" },
-    { name: "License", href: "#" },
-  ],
-};
 
 const mobileMenuOpen = ref(false);
+
+const footerNavigation = {
+  main: [
+    { name: "SEO", href: "#" },
+    { name: "Components", href: "#" },
+    { name: "Animation", href: "#" },
+    { name: "Dashboard", href: "#" },
+    { name: "Forms", href: "#" },
+    { name: "Fetching", href: "#" },
+    { name: "Back-End", href: "#" },
+  ],
+  social: [
+    {
+      name: "Facebook",
+      href: "#",
+      icon: defineComponent({
+        render: () =>
+          h("svg", { fill: "currentColor", viewBox: "0 0 24 24" }, [
+            h("path", {
+              "fill-rule": "evenodd",
+              d: "M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z",
+              "clip-rule": "evenodd",
+            }),
+          ]),
+      }),
+    },
+    {
+      name: "Instagram",
+      href: "#",
+      icon: defineComponent({
+        render: () =>
+          h("svg", { fill: "currentColor", viewBox: "0 0 24 24" }, [
+            h("path", {
+              "fill-rule": "evenodd",
+              d: "M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z",
+              "clip-rule": "evenodd",
+            }),
+          ]),
+      }),
+    },
+    {
+      name: "X",
+      href: "#",
+      icon: defineComponent({
+        render: () =>
+          h("svg", { fill: "currentColor", viewBox: "0 0 24 24" }, [
+            h("path", {
+              d: "M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z",
+            }),
+          ]),
+      }),
+    },
+    {
+      name: "GitHub",
+      href: "#",
+      icon: defineComponent({
+        render: () =>
+          h("svg", { fill: "currentColor", viewBox: "0 0 24 24" }, [
+            h("path", {
+              "fill-rule": "evenodd",
+              d: "M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z",
+              "clip-rule": "evenodd",
+            }),
+          ]),
+      }),
+    },
+    {
+      name: "YouTube",
+      href: "#",
+      icon: defineComponent({
+        render: () =>
+          h("svg", { fill: "currentColor", viewBox: "0 0 24 24" }, [
+            h("path", {
+              "fill-rule": "evenodd",
+              d: "M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z",
+              "clip-rule": "evenodd",
+            }),
+          ]),
+      }),
+    },
+  ],
+};
 
 useSeoMeta({
   title: "Nuxt Starter Template",
@@ -245,7 +249,7 @@ useHead({
           aria-hidden="true"
         >
           <div
-            class="relative left-[calc(50%-11rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-r from-purple-500 to-pink-500 opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#74ff7e] to-[#9089fc] opacity-50 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
             style="
               clip-path: polygon(
                 74.1% 44.1%,
@@ -266,9 +270,7 @@ useHead({
                 74.1% 44.1%
               );
             "
-          >
-            .
-          </div>
+          />
         </div>
         <div class="py-24 sm:py-32 lg:pb-40">
           <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -338,7 +340,7 @@ useHead({
           aria-hidden="true"
         >
           <div
-            class="relative left-[calc(50%+3rem)] aspect-1155/678 w-[36.125rem] -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#8aff90] to-[#655bf9] opacity-50 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
             style="
               clip-path: polygon(
                 74.1% 44.1%,
@@ -412,7 +414,7 @@ useHead({
               >Transistor saves up to $40,000 per year, per employee by working
               with us.</span
             >
-            <a href="#" class="font-semibold text-indigo-600"
+            <a href="#" class="font-semibold text-green-600"
               ><span class="absolute inset-0" aria-hidden="true" /> Read our
               case study <span aria-hidden="true">&rarr;</span></a
             >
@@ -423,9 +425,7 @@ useHead({
       <!-- Feature section -->
       <div class="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
         <div class="mx-auto max-w-2xl lg:text-center">
-          <h2 class="text-base/7 font-semibold text-indigo-600">
-            Deploy faster
-          </h2>
+          <h2 class="text-base/7 font-semibold text-gree-600">Deploy faster</h2>
           <p
             class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance"
           >
@@ -448,7 +448,7 @@ useHead({
             >
               <dt class="text-base/7 font-semibold text-gray-900">
                 <div
-                  class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-indigo-600"
+                  class="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-green-500"
                 >
                   <Icon
                     :name="feature.icon"
@@ -559,147 +559,32 @@ useHead({
         </div>
       </div>
 
-      <!-- Pricing section -->
-      <div class="py-24 sm:pt-48">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="mx-auto max-w-2xl lg:text-center">
-            <h2 class="text-base/7 font-semibold text-indigo-600">Pricing</h2>
-            <p
-              class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance"
-            >
-              Pricing that grows with you
-            </p>
-            <p class="mt-6 text-lg/8 text-pretty text-gray-600">
-              Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
-              Suspendisse eget egestas a elementum pulvinar et feugiat blandit
-              at. In mi viverra elit nunc.
-            </p>
-          </div>
-          <div
-            class="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
-          >
-            <div
-              v-for="(tier, tierIdx) in tiers"
-              :key="tier.id"
-              :class="[
-                tier.mostPopular ? 'lg:z-10 lg:rounded-b-none' : 'lg:mt-8',
-                tierIdx === 0 ? 'lg:rounded-r-none' : '',
-                tierIdx === tiers.length - 1 ? 'lg:rounded-l-none' : '',
-                'flex flex-col justify-between rounded-3xl bg-white p-8 ring-1 ring-gray-200 xl:p-10',
-              ]"
-            >
-              <div>
-                <div class="flex items-center justify-between gap-x-4">
-                  <h3
-                    :id="tier.id"
-                    :class="[
-                      tier.mostPopular ? 'text-indigo-600' : 'text-gray-900',
-                      'text-lg/8 font-semibold',
-                    ]"
-                  >
-                    {{ tier.name }}
-                  </h3>
-                  <p
-                    v-if="tier.mostPopular"
-                    class="rounded-full bg-indigo-600/10 px-2.5 py-1 text-xs/5 font-semibold text-indigo-600"
-                  >
-                    Most popular
-                  </p>
-                </div>
-                <p class="mt-4 text-sm/6 text-gray-600">
-                  {{ tier.description }}
-                </p>
-                <p class="mt-6 flex items-baseline gap-x-1">
-                  <span
-                    class="text-4xl font-semibold tracking-tight text-gray-900"
-                    >{{ tier.priceMonthly }}</span
-                  >
-                  <span class="text-sm/6 font-semibold text-gray-600"
-                    >/month</span
-                  >
-                </p>
-                <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-600">
-                  <li
-                    v-for="feature in tier.features"
-                    :key="feature"
-                    class="flex gap-x-3"
-                  >
-                    <Icon
-                      name="ic:round-check"
-                      class="text-2xl flex-none text-indigo-600 shrink-0"
-                      aria-hidden="true"
-                    />
-                    {{ feature }}
-                  </li>
-                </ul>
-              </div>
-              <a
-                :href="tier.href"
-                :aria-describedby="tier.id"
-                :class="[
-                  tier.mostPopular
-                    ? 'bg-indigo-600 text-white shadow-xs hover:bg-indigo-500'
-                    : 'text-indigo-600 ring-1 ring-indigo-200 ring-inset hover:ring-indigo-300',
-                  'mt-8 block rounded-md px-3 py-2 text-center text-sm/6 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
-                ]"
-                >Buy plan</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQs -->
-      <div
-        class="mx-auto max-w-2xl px-6 pb-8 sm:pt-12 sm:pb-24 lg:max-w-7xl lg:px-8 lg:pb-32"
-      >
-        <h2
-          class="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl"
-        >
-          Frequently asked questions
-        </h2>
-        <dl class="mt-20 divide-y divide-gray-900/10">
-          <div
-            v-for="faq in faqs"
-            :key="faq.id"
-            class="py-8 first:pt-0 last:pb-0 lg:grid lg:grid-cols-12 lg:gap-8"
-          >
-            <dt class="text-base/7 font-semibold text-gray-900 lg:col-span-5">
-              {{ faq.question }}
-            </dt>
-            <dd class="mt-4 lg:col-span-7 lg:mt-0">
-              <p class="text-base/7 text-gray-600">{{ faq.answer }}</p>
-            </dd>
-          </div>
-        </dl>
-      </div>
-
       <!-- CTA section -->
       <div class="relative -z-10 mt-32 px-6 lg:px-8">
         <div
-          class="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 transform-gpu justify-center overflow-hidden blur-3xl sm:top-auto sm:right-[calc(50%-6rem)] sm:bottom-0 sm:translate-y-0 sm:transform-gpu sm:justify-end"
+          class="hidden md:absolute md:bottom-16 md:left-[50rem] md:block md:transform-gpu md:blur-3xl"
           aria-hidden="true"
         >
           <div
-            class="aspect-1108/632 w-[69.25rem] flex-none bg-linear-to-r from-[#ff80b5] to-[#9089fc] opacity-25"
+            class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-r from-[#ff4694] to-[#776fff] opacity-25"
             style="
               clip-path: polygon(
-                73.6% 48.6%,
-                91.7% 88.5%,
-                100% 53.9%,
-                97.4% 18.1%,
-                92.5% 15.4%,
-                75.7% 36.3%,
-                55.3% 52.8%,
-                46.5% 50.9%,
-                45% 37.4%,
-                50.3% 13.1%,
-                21.3% 36.2%,
-                0.1% 0.1%,
-                5.4% 49.1%,
-                21.4% 36.4%,
-                58.9% 100%,
-                73.6% 48.6%
+                74.1% 44.1%,
+                100% 61.6%,
+                97.5% 26.9%,
+                85.5% 0.1%,
+                80.7% 2%,
+                72.5% 32.5%,
+                60.2% 62.4%,
+                52.4% 68.1%,
+                47.5% 58.3%,
+                45.2% 34.5%,
+                27.5% 76.7%,
+                0.1% 64.9%,
+                17.9% 100%,
+                27.6% 76.8%,
+                76.1% 97.7%,
+                74.1% 44.1%
               );
             "
           />
@@ -708,29 +593,15 @@ useHead({
           <h2
             class="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl"
           >
-            Boost your productivity. Start using our app today.
+            Boost your productivity. Start using our starter template today.
           </h2>
-          <p class="mx-auto mt-6 max-w-xl text-lg/8 text-pretty text-gray-600">
-            Incididunt sint fugiat pariatur cupidatat consectetur sit cillum
-            anim id veniam aliqua proident excepteur commodo do ea.
-          </p>
-          <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a
-              href="#"
-              class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >Get started</a
-            >
-            <a href="#" class="text-sm/6 font-semibold text-gray-900"
-              >Learn more <span aria-hidden="true">→</span></a
-            >
-          </div>
         </div>
         <div
-          class="absolute top-full right-0 left-1/2 -z-10 hidden -translate-y-1/2 transform-gpu overflow-hidden blur-3xl sm:block"
+          class="hidden md:absolute md:bottom-16 md:left-[50rem] md:block md:transform-gpu md:blur-3xl"
           aria-hidden="true"
         >
           <div
-            class="aspect-1155/678 w-[72.1875rem] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
+            class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-r from-[#46ff68] to-[#43ff36] opacity-40"
             style="
               clip-path: polygon(
                 74.1% 44.1%,
@@ -757,72 +628,36 @@ useHead({
     </main>
 
     <!-- Footer -->
-    <footer class="relative mx-auto mt-32 max-w-7xl px-6 lg:px-8">
-      <div class="border-t border-gray-900/10 py-16 sm:py-24 lg:py-32">
-        <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-          <img
-            class="h-9"
-            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Company name"
-          />
-          <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div class="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 class="text-sm/6 font-semibold text-gray-900">Solutions</h3>
-                <ul role="list" class="mt-6 space-y-4">
-                  <li
-                    v-for="item in footerNavigation.solutions"
-                    :key="item.name"
-                  >
-                    <a
-                      :href="item.href"
-                      class="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >{{ item.name }}</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              <div class="mt-10 md:mt-0">
-                <h3 class="text-sm/6 font-semibold text-gray-900">Support</h3>
-                <ul role="list" class="mt-6 space-y-4">
-                  <li v-for="item in footerNavigation.support" :key="item.name">
-                    <a
-                      :href="item.href"
-                      class="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >{{ item.name }}</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="md:grid md:grid-cols-2 md:gap-8">
-              <div>
-                <h3 class="text-sm/6 font-semibold text-gray-900">Company</h3>
-                <ul role="list" class="mt-6 space-y-4">
-                  <li v-for="item in footerNavigation.company" :key="item.name">
-                    <a
-                      :href="item.href"
-                      class="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >{{ item.name }}</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              <div class="mt-10 md:mt-0">
-                <h3 class="text-sm/6 font-semibold text-gray-900">Legal</h3>
-                <ul role="list" class="mt-6 space-y-4">
-                  <li v-for="item in footerNavigation.legal" :key="item.name">
-                    <a
-                      :href="item.href"
-                      class="text-sm/6 text-gray-600 hover:text-gray-900"
-                      >{{ item.name }}</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+    <footer class="bg-gray-100 mt-20">
+      <div
+        class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8"
+      >
+        <nav
+          class="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6"
+          aria-label="Footer"
+        >
+          <a
+            v-for="item in footerNavigation.main"
+            :key="item.name"
+            :href="item.href"
+            class="text-gray-400 hover:text-green-500"
+            >{{ item.name }}</a
+          >
+        </nav>
+        <div class="mt-16 flex justify-center gap-x-10">
+          <a
+            v-for="item in footerNavigation.social"
+            :key="item.name"
+            :href="item.href"
+            class="text-gray-400 hover:text-green-500"
+          >
+            <span class="sr-only">{{ item.name }}</span>
+            <component :is="item.icon" class="size-6" aria-hidden="true" />
+          </a>
         </div>
+        <p class="mt-10 text-center text-sm/6 text-gray-400">
+          &copy; 2024 Your Company, Inc. All rights reserved.
+        </p>
       </div>
     </footer>
   </div>
