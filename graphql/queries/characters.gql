@@ -1,0 +1,8 @@
+query characters($limit: Int) {
+  characters(page: $limit) {
+    results {
+      name
+      image
+    }
+  }
+}
