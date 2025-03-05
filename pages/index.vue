@@ -2,7 +2,7 @@
 import { defineComponent, h } from "vue";
 
 const navigation = [
-  { name: "SEO", href: "#" },
+  { name: "SEO", href: "/seo" },
   { name: "Components", href: "#" },
   { name: "Animation", href: "#" },
   { name: "Dashboard", href: "#" },
@@ -129,7 +129,7 @@ useSeoMeta({
   ogDescription:
     "A starter template for Nuxt 3 with Tailwind CSS, Apollo Client",
   ogImage: "/images/Nuxt_starter_meta_img.png",
-  ogUrl: "[og:url]",
+  ogUrl: "https://nuxt-3-starter-template-gold.vercel.app/",
   twitterTitle: "Nuxt Starter Template",
   twitterDescription:
     "A starter template for Nuxt 3 with Tailwind CSS, Apollo Client",
@@ -278,12 +278,12 @@ useHead({
               <h1
                 class="text-5xl font-semibold tracking-tight text-balance text-gray-700 sm:text-7xl"
               >
-                Kickstart Your Future
+                Kickstart Your Project
               </h1>
               <h1
                 class="text-5xl font-semibold tracking-tight text-balance text-green-500 sm:text-7xl"
               >
-                Nuxt 3 Starter
+                With Nuxt 3
               </h1>
 
               <p class="mt-8 text-pretty text-gray-500">
@@ -476,7 +476,7 @@ useHead({
             src="https://images.unsplash.com/photo-1601381718415-a05fb0a261f3?ixid=MXwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8ODl8fHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1216&q=80"
             alt=""
           />
-          <div class="absolute inset-0 bg-gray-900/90 mix-blend-multiply" />
+          <div class="absolute inset-0 bg-gray-500/90 mix-blend-multiply" />
           <div
             class="absolute -top-56 -left-80 transform-gpu blur-3xl"
             aria-hidden="true"

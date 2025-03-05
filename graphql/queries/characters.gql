@@ -1,8 +1,14 @@
 query characters($limit: Int) {
   characters(page: $limit) {
     results {
+      id
       name
       image
+      species
+      gender
+      origin {
+        name
+      }
     }
   }
 }

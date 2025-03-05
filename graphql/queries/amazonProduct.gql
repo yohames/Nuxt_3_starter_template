@@ -1,0 +1,12 @@
+query amazonProduct {
+  amazonProduct(input: { asinLookup: { asin: "B0D1XD1ZV3" } }) {
+    title
+    brand
+    mainImageUrl
+    ratingsTotal
+    rating
+    price {
+      display
+    }
+  }
+}
