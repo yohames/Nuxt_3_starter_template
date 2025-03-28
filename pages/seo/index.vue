@@ -1,30 +1,68 @@
 <script setup lang="ts">
+import { useDebounceFn } from "@vueuse/core";
 import clientsEnum from "@/utils/apolloClientsEnum";
 import characters_query from "@/graphql/queries/characters.gql";
 
-const variables = {
-  limit: 5,
-};
-const items = ref([]);
-const tempOpt = {
-  server: true,
-  default: () => [
-    {
-      name: "Rick Sanchez",
-      image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-      status: "Alive",
-      species: "Human",
-      gender: "Male",
-      origin: {
-        name: "Earth (C-137)",
-      },
-      location: {
-        name: "Citadel of Ricks",
-        dimension: "unknown",
-      },
+// Data fetching
+// const tempOpt = {
+//   server: true,
+//   default: () => [
+//     {
+//       name: "Rick Sanchez",
+//       image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+//       status: "Alive",
+//       species: "Human",
+//       gender: "Male",
+//       origin: {
+//         name: "Earth (C-137)",
+//       },
+//       location: {
+//         name: "Citadel of Ricks",
+//         dimension: "unknown",
+//       },
+//     },
+//   ],
+// };
+
+const currentPage = ref(1);
+const totalItems = ref(30);
+const limit = ref(10);
+const search = ref("");
+
+const variables = computed(() => {
+  return {
+    page: currentPage.value,
+    filter: {
+      name: search.value,
     },
-  ],
-};
+  };
+});
+
+let tempSearch = ref("");
+const debouncedFn = useDebounceFn(
+  () => {
+    search.value = tempSearch.value;
+    execute();
+  },
+  1000,
+  { maxWait: 5000 }
+);
+function onSearch(value: string) {
+  tempSearch.value = value;
+  debouncedFn();
+}
+
+function onSubmit() {
+  search.value = tempSearch.value;
+  debouncedFn();
+}
+
+function audioSearch() {
+  console.log("audio search");
+}
+function imageSearch() {
+  console.log("image search");
+}
 
 const {
   data: characters,
@@ -33,9 +71,9 @@ const {
   execute,
 } = await asyncQueryFetch({
   query: characters_query,
-  variables: variables,
+  variables,
   clientId: clientsEnum.ClientRickAndMorty,
-  options: tempOpt,
+  options: { server: true },
 });
 
 useSeoMeta({
@@ -67,9 +105,6 @@ useHead({
     },
   ],
 });
-
-
-
 </script>
 <template>
   <div class="relative">
@@ -87,19 +122,39 @@ useHead({
         class="w-1/2"
       />
     </div>
-
+    {{ status }}
     <div>
       <div class="my-10 mx-auto max-w-[95vw] sm:max-w-[50vw]">
-        <div
-          class="flex items-center border focus-within:border-green-500 transition duration-300 pr-3 py-3 gap-2 bg-white border-green-500 rounded-full overflow-hidden"
+        <PrimSearchBar
+          v-model="search"
+          input-class="flex-1 placeholder-gray-300 text-gray-600"
+          @update="onSearch"
+          @change="onSubmit"
+          wrapper-class="flex items-center border p-2 focus-within:border-green-500 transition duration-300 bg-white border-green-500 rounded-full overflow-hidden"
+          placeholder="Search characters"
         >
-          <input
-            type="text"
-            placeholder="Search for products"
-            class="w-full h-full pl-4 text-gray-600 outline-none placeholder-gray-300 text-sm"
-          />
-          <Icon name="mdi:search" class="text-2xl text-green-500 shrink-0" />
-        </div>
+          <template #leading-icon>
+            <span class="flex items-center pr-3">
+              <Icon
+                name="material-symbols:search"
+                class="text-2xl text-green-500 pr-2"
+              />
+            </span>
+          </template>
+          <template #trailing-icon>
+            <div class="flex gap-x-3 items-center">
+              <button class="flex items-center" @click="audioSearch">
+                <Icon name="bi:mic" class="text-lg text-green-500" />
+              </button>
+              <button class="flex items-center" @click="imageSearch">
+                <Icon
+                  name="fluent:camera-add-20-regular"
+                  class="text-xl text-green-500"
+                />
+              </button>
+            </div>
+          </template>
+        </PrimSearchBar>
       </div>
       <div
         class="bg-[linear-gradient(180deg,rgba(0,36,12,0)_0%,rgba(255,255,255,0.9)_21%,rgba(255,255,255,0.9)_100%)]"
@@ -116,22 +171,29 @@ useHead({
               :to="{ name: 'seo-id', params: { id: character.id } }"
               v-for="character in characters.characters.results"
               :key="character.id"
-              class="group"
+              class="group bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent hover:border-gray-200 duration-200"
             >
               <img
                 :src="character.image"
                 :alt="character.name"
-                class="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8]"
+                class="aspect-square w-full rounded-t-lg bg-gray-200 object-cover scale-105 group-hover:scale-100 duration-300 xl:aspect-[7/8]"
               />
-              <h3 class="mt-1 text-lg font-medium text-gray-900">
-                {{ character.name }}
-              </h3>
-              <p class="mt-1 text-sm text-gray-700">
-                Species: {{ character.species }}
-              </p>
+              <div class="p-4">
+                <h3 class="mt-1 text-lg font-semibold text-gray-900">
+                  {{ character.name }}
+                </h3>
+                <p class="mt-1 text-sm text-gray-700">
+                  Species: {{ character.species }}
+                </p>
+              </div>
             </NuxtLink>
           </div>
         </div>
+        <NavPagination
+          :currentPage="currentPage"
+          :totalItems="totalItems"
+          :limit="limit"
+        />
       </div>
     </div>
   </div>

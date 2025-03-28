@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "nuxt-headlessui",
     "@nuxt/icon",
+    "@vueuse/nuxt",
   ],
   apollo: {
     clients: {

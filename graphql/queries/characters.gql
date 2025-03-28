@@ -1,5 +1,11 @@
-query characters($limit: Int) {
-  characters(page: $limit) {
+query characters($limit: Int, $filter: FilterCharacter) {
+  characters(page: $limit, filter: $filter) {
+    info {
+      count
+      pages
+      next
+      prev
+    }
     results {
       id
       name
