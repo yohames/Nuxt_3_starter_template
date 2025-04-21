@@ -3,6 +3,8 @@ import { useDebounceFn } from "@vueuse/core";
 import clientsEnum from "@/utils/apolloClientsEnum";
 import characters_query from "@/graphql/queries/characters.gql";
 
+const route = useRoute();
+
 // Data fetching
 // const tempOpt = {
 //   server: true,
@@ -23,9 +25,31 @@ import characters_query from "@/graphql/queries/characters.gql";
 //     },
 //   ],
 // };
-
-const currentPage = ref(1);
-const totalItems = ref(30);
+const router = useRouter();
+const currentPage = computed({
+  get: () => {
+    return route.query.currentPage ? +route.query.currentPage : 1;
+  },
+  set: (value) => {
+    router.push({
+      query: {
+        currentPage: value,
+      },
+    });
+  },
+});
+const totalPages = computed({
+  get: () => {
+    return characters.value?.characters?.info?.pages || 0;
+  },
+  set: (value) => {
+    router.push({
+      query: {
+        totalPages: value,
+      },
+    });
+  },
+});
 const limit = ref(10);
 const search = ref("");
 
@@ -45,7 +69,7 @@ const debouncedFn = useDebounceFn(
     execute();
   },
   1000,
-  { maxWait: 5000 }
+  { maxWait: 2000 }
 );
 function onSearch(value: string) {
   tempSearch.value = value;
@@ -108,6 +132,9 @@ useHead({
 </script>
 <template>
   <div class="relative">
+    {{ currentPage }}
+    {{ totalPages }}
+    <!-- {{ totalPages }} -->
     <span class="absolute inset-0 -z-10">
       <img
         src="/images/rick_and_morty_wallpaper.jpg"
@@ -122,7 +149,6 @@ useHead({
         class="w-1/2"
       />
     </div>
-    {{ status }}
     <div>
       <div class="my-10 mx-auto max-w-[95vw] sm:max-w-[50vw]">
         <PrimSearchBar
@@ -163,13 +189,15 @@ useHead({
           class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
         >
           <h2 class="sr-only">Characters</h2>
-
           <div
             class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+            v-if="
+              status === 'success' && characters?.characters?.results?.length
+            "
           >
             <NuxtLink
               :to="{ name: 'seo-id', params: { id: character.id } }"
-              v-for="character in characters.characters.results"
+              v-for="character in characters?.characters?.results || 4"
               :key="character.id"
               class="group bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent hover:border-gray-200 duration-200"
             >
@@ -188,12 +216,32 @@ useHead({
               </div>
             </NuxtLink>
           </div>
+          <div
+            class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+            v-else-if="status === 'pending'"
+          >
+            <div
+              class="group bg-white rounded-lg shadow-lg overflow-hidden border-2 border-transparent hover:border-gray-200 duration-200 w-[280px] h-[407px]"
+              v-for="i in 12"
+              :key="i"
+            ></div>
+          </div>
+
+          <div
+            class="flex flex-col items-center justify-center text-gray-500 text-xl gap-y-10 font-semibold mt-40 mb-20"
+            v-else
+          >
+            <Icon name="bi:database-x" class="size-[10rem] text-gray-500" />
+            No characters found
+          </div>
         </div>
-        <NavPagination
-          :currentPage="currentPage"
-          :totalItems="totalItems"
-          :limit="limit"
-        />
+        <div class="w-1/2 mx-auto">
+          <!-- <DDPagination
+            :currentPage="currentPage"
+            :totalPages="totalPages"
+            :limit="limit"
+          /> -->
+        </div>
       </div>
     </div>
   </div>

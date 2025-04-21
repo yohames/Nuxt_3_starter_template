@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const features = [
   {
     name: "Push to deploy",
@@ -58,7 +57,7 @@ useHead({
 </script>
 
 <template>
-  <div class="bg-white">
+  <div class="bg-white dark:bg-gray-700">
     <main class="isolate">
       <!-- Hero section -->
       <div class="relative pt-14">

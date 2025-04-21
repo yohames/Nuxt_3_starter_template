@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const navigation = [
   { name: "SEO", href: "/seo" },
-  { name: "Components", href: "#" },
+  { name: "Components", href: "/components" },
   { name: "Animation", href: "#" },
   { name: "Dashboard", href: "#" },
   { name: "Forms", href: "#" },
@@ -12,7 +12,7 @@ const mobileMenuOpen = ref(false);
 </script>
 <template>
   <!-- Header -->
-  <header class="absolute inset-x-0 top-0 z-50">
+  <header class="sticky inset-x-0 top-0 z-50">
     <nav
       class="flex items-center justify-between p-6 lg:px-8"
       aria-label="Global"
@@ -43,6 +43,7 @@ const mobileMenuOpen = ref(false);
         >
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <NavThemeSwitcher />
         <a href="#" class="text-sm/6 font-semibold text-gray-900"
           >Log in <span aria-hidden="true">&rarr;</span></a
         >
@@ -87,6 +88,7 @@ const mobileMenuOpen = ref(false);
               >
             </div>
             <div class="py-6">
+              <NavThemeSwitcher />
               <a
                 href="#"
                 class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
